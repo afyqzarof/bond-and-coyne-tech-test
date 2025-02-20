@@ -26,7 +26,7 @@ export const CharacterCard = ({
         <p className="mb-4 text-gray-600">Species: {character.species}</p>
         <button
           onClick={() => onMoreInfo(character)}
-          className="w-full rounded bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
+          className="w-full cursor-pointer rounded bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
         >
           More Info
         </button>

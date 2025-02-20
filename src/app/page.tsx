@@ -9,7 +9,10 @@ export default function Home() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showInfoModel, setShowInfoModel] = useState(false);
+  // const [showInfoModel, setShowInfoModel] = useState(false);
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
+    null,
+  );
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -32,16 +35,16 @@ export default function Home() {
   }, []);
 
   const handleMoreInfo = (character: Character) => {
-    console.log(character);
+    setSelectedCharacter(character);
 
-    setShowInfoModel(true);
+    // setShowInfoModel(true);
     if (typeof window != 'undefined' && window.document) {
       document.body.style.overflow = 'hidden';
     }
   };
 
   const handleCloseModal = () => {
-    setShowInfoModel(false);
+    setSelectedCharacter(null);
     if (typeof window != 'undefined' && window.document) {
       document.body.style.overflow = 'unset';
     }
@@ -65,8 +68,11 @@ export default function Home() {
 
   return (
     <>
-      {showInfoModel && (
-        <CharacterInfoModal handleCloseModal={handleCloseModal} />
+      {selectedCharacter && (
+        <CharacterInfoModal
+          handleCloseModal={handleCloseModal}
+          character={selectedCharacter}
+        />
       )}
       <div className="container mx-auto px-4 py-16">
         <h1 className="mb-8 text-center text-3xl font-bold">
