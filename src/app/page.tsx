@@ -3,11 +3,15 @@
 import { useEffect, useState } from 'react';
 import { Character } from './types';
 import { CharacterCard } from './components/CharacterCard';
+import CharacterInfoModal from './components/CharacterInfoModal';
 
 export default function Home() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
+    null,
+  );
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -29,9 +33,23 @@ export default function Home() {
     fetchCharacters();
   }, []);
 
+  const handleMoreInfo = (character: Character) => {
+    setSelectedCharacter(character);
+    if (typeof window != 'undefined' && window.document) {
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedCharacter(null);
+    if (typeof window != 'undefined' && window.document) {
+      document.body.style.overflow = 'unset';
+    }
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <p className="text-lg">Loading characters...</p>
       </div>
     );
@@ -39,29 +57,34 @@ export default function Home() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <p className="text-lg text-red-500">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold mb-8 text-center">
-        Rick and Morty Characters
-      </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {characters.map((character) => (
-          <CharacterCard
-            key={character.id}
-            character={character}
-            onMoreInfo={() => {
-              // Open Modal
-              console.log('More info clicked for:', character.name);
-            }}
-          />
-        ))}
+    <>
+      {selectedCharacter && (
+        <CharacterInfoModal
+          handleCloseModal={handleCloseModal}
+          character={selectedCharacter}
+        />
+      )}
+      <div className="container mx-auto px-4 py-16">
+        <h1 className="mb-8 text-center text-3xl font-bold">
+          Rick and Morty Characters
+        </h1>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {characters.map((character) => (
+            <CharacterCard
+              key={character.id}
+              character={character}
+              onMoreInfo={handleMoreInfo}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

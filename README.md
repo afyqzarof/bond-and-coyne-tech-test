@@ -1,4 +1,11 @@
-# Bond and Coyne: Developer Role Take-Home Task
+# Bond and Coyne: Developer Role Take-Home Task (Afyq)
+
+## Improvements I would make if given more time
+
+1. Define a universal function for api call
+2. Make use of server-side components for better SEO
+3. Modal could be opened by a query parameter so it is easily sharable
+4. Cache episode data to reduce api request volume
 
 ## Overview
 
@@ -79,7 +86,7 @@ npm run test
 
 ## Time Expectation
 
-We expect this task to take 1-2 hours. Focus on demonstrating clean code and good architecture rather than additional features. Please do 
+We expect this task to take 1-2 hours. Focus on demonstrating clean code and good architecture rather than additional features. Please do
 not spend more than 2 hours on this task, we are more interested in your approach and code quality than the amount of time you spend.
 
 ## Questions?
