@@ -31,13 +31,25 @@ export default function Home() {
     fetchCharacters();
   }, []);
 
-  const handleMoreInfo = () => {
+  const handleMoreInfo = (character: Character) => {
+    console.log(character);
+
     setShowInfoModel(true);
+    if (typeof window != 'undefined' && window.document) {
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowInfoModel(false);
+    if (typeof window != 'undefined' && window.document) {
+      document.body.style.overflow = 'unset';
+    }
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <p className="text-lg">Loading characters...</p>
       </div>
     );
@@ -45,7 +57,7 @@ export default function Home() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <p className="text-lg text-red-500">{error}</p>
       </div>
     );
@@ -53,23 +65,23 @@ export default function Home() {
 
   return (
     <>
+      {showInfoModel && (
+        <CharacterInfoModal handleCloseModal={handleCloseModal} />
+      )}
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-3xl font-bold mb-8 text-center">
+        <h1 className="mb-8 text-center text-3xl font-bold">
           Rick and Morty Characters
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {characters.map((character) => (
             <CharacterCard
               key={character.id}
               character={character}
-              onMoreInfo={() => {
-                handleMoreInfo();
-              }}
+              onMoreInfo={handleMoreInfo}
             />
           ))}
         </div>
       </div>
-      <CharacterInfoModal />
     </>
   );
 }

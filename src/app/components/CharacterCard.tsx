@@ -11,7 +11,7 @@ export const CharacterCard = ({
   onMoreInfo,
 }: CharacterCardProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="overflow-hidden rounded-lg bg-white shadow-md">
       <div className="relative h-48 w-full">
         <Image
           src={character.image}
@@ -21,12 +21,12 @@ export const CharacterCard = ({
         />
       </div>
       <div className="p-4">
-        <h2 className="text-xl font-bold mb-2">{character.name}</h2>
-        <p className="text-gray-600 mb-2">Status: {character.status}</p>
-        <p className="text-gray-600 mb-4">Species: {character.species}</p>
+        <h2 className="mb-2 text-xl font-bold">{character.name}</h2>
+        <p className="mb-2 text-gray-600">Status: {character.status}</p>
+        <p className="mb-4 text-gray-600">Species: {character.species}</p>
         <button
           onClick={() => onMoreInfo(character)}
-          className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+          className="w-full rounded bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
         >
           More Info
         </button>
