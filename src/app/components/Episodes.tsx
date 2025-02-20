@@ -35,7 +35,13 @@ export default function Episodes({ episodeIds }: EpisodesProps) {
   };
 
   if (loading) {
-    return <p>loading ...</p>;
+    return (
+      <div className="flex w-3/6 flex-col gap-1">
+        <div className="h-3 animate-pulse rounded bg-gray-400"></div>
+        <div className="h-3 animate-pulse rounded bg-gray-400"></div>
+        <div className="h-3 animate-pulse rounded bg-gray-400"></div>
+      </div>
+    );
   }
 
   if (error) {

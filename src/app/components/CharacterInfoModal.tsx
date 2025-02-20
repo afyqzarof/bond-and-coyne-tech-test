@@ -57,7 +57,7 @@ export default function CharacterInfoModal({
         </button>
       </div>
 
-      <article className="z-20 flex flex-1 flex-col gap-6 rounded-2xl bg-white p-4 opacity-100 lg:grid lg:w-4/6 lg:flex-none lg:grid-cols-2 lg:gap-12">
+      <article className="z-20 flex flex-1 flex-col gap-6 rounded-2xl bg-white p-4 opacity-100 lg:grid lg:h-2/6 lg:w-4/6 lg:flex-none lg:grid-cols-2 lg:gap-12 xl:w-3/6">
         <div className="relative h-3/6 w-full lg:h-full">
           <Image
             src={character.image}
@@ -66,7 +66,7 @@ export default function CharacterInfoModal({
             className="rounded-2xl object-cover"
           />
         </div>
-        <div className="flex flex-1 flex-col justify-between lg:justify-start lg:gap-4">
+        <div className="flex flex-1 flex-col justify-between">
           <section className="flex flex-col gap-4">
             <h3 className="mb-0 border-b border-black/10 pb-2 text-2xl font-bold">
               {character.name}
@@ -100,7 +100,8 @@ export default function CharacterInfoModal({
               <Episodes episodeIds={getEpisodeIds(character.episode)} />
             </div>
           </section>
-          <button className="flex cursor-pointer justify-between justify-self-end rounded-full bg-blue-500 p-4 text-sm font-bold text-white hover:bg-blue-600">
+          {/* link to more info page */}
+          <a className="hover:bg-blue-600g flex cursor-pointer justify-between justify-self-end rounded-full bg-blue-500 p-4 text-sm font-bold text-white">
             Find out more about {getFirstName(character.name)}
             <Image
               src="external-link.svg"
@@ -109,7 +110,7 @@ export default function CharacterInfoModal({
               height={100}
               className="w-5"
             />
-          </button>
+          </a>
         </div>
       </article>
     </div>
