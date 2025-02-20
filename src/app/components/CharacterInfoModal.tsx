@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Character } from '../types';
+import Episodes from './Episodes';
 interface CharacterInfoModalProps {
   handleCloseModal: () => void;
   character: Character;
@@ -33,6 +34,10 @@ export default function CharacterInfoModal({
     }.`;
 
     return aboutText;
+  }
+
+  function getEpisodeIds(episodes: string[]) {
+    return episodes.slice(0, 3).map((url) => url.split('/').pop() || '');
   }
 
   return (
@@ -92,15 +97,19 @@ export default function CharacterInfoModal({
               />
               <h4 className="text-sm font-bold">Episodes</h4>
             </div>
-            <ol className="flex list-decimal flex-col pl-4 text-sm">
-              <li>Episode 1 - Title</li>
-              <li>Episode 1 - Title</li>
-              <li>Episode 1 - Title</li>
-            </ol>
+
+            <Episodes episodeIds={getEpisodeIds(character.episode)} />
           </div>
         </section>
-        <button className="justify-self-end rounded-full bg-blue-500 py-4 text-sm font-bold text-white hover:bg-blue-600">
-          Find out more about Rick
+        <button className="flex justify-between justify-self-end rounded-full bg-blue-500 p-4 text-sm font-bold text-white hover:bg-blue-600">
+          Find out more about Rick{' '}
+          <Image
+            src="external-link.svg"
+            alt="episodes"
+            width={100}
+            height={100}
+            className="w-5"
+          />
         </button>
       </article>
     </div>
