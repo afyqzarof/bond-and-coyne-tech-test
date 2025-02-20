@@ -41,8 +41,8 @@ export default function CharacterInfoModal({
   }
 
   return (
-    <div className="fixed inset-0 z-10 flex flex-col gap-4 bg-black/70 p-8 backdrop-blur-sm">
-      <div className="flex justify-end">
+    <div className="fixed inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-black/70 p-8 backdrop-blur-sm">
+      <div className="flex w-full justify-end lg:absolute lg:right-4 lg:top-4">
         <button
           className="z-20 h-12 w-12 cursor-pointer rounded-full bg-white p-4 opacity-100"
           onClick={handleCloseModal}
@@ -57,8 +57,8 @@ export default function CharacterInfoModal({
         </button>
       </div>
 
-      <article className="z-20 flex flex-1 flex-col gap-6 rounded-2xl bg-white p-4 opacity-100">
-        <div className="relative h-3/6 w-full">
+      <article className="z-20 flex flex-1 flex-col gap-6 rounded-2xl bg-white p-4 opacity-100 lg:grid lg:w-4/6 lg:flex-none lg:grid-cols-2 lg:gap-12">
+        <div className="relative h-3/6 w-full lg:h-full">
           <Image
             src={character.image}
             alt={character.name}
@@ -66,51 +66,51 @@ export default function CharacterInfoModal({
             className="rounded-2xl object-cover"
           />
         </div>
-        <section className="flex flex-col gap-4">
-          <h3 className="mb-0 border-b border-black/10 pb-2 text-2xl font-bold">
-            {character.name}
-          </h3>
-          <div className="flex flex-col gap-2">
-            <div className="flex gap-2">
-              <Image
-                src="info.svg"
-                alt="info"
-                width={100}
-                height={100}
-                className="w-5"
-              />
-              <h4 className="text-sm font-bold">
-                About {getFirstName(character.name)}
-              </h4>
+        <div className="flex flex-1 flex-col justify-between lg:justify-start lg:gap-4">
+          <section className="flex flex-col gap-4">
+            <h3 className="mb-0 border-b border-black/10 pb-2 text-2xl font-bold">
+              {character.name}
+            </h3>
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-2">
+                <Image
+                  src="info.svg"
+                  alt="info"
+                  width={100}
+                  height={100}
+                  className="w-5"
+                />
+                <h4 className="text-sm font-bold">
+                  About {getFirstName(character.name)}
+                </h4>
+              </div>
+              <p className="text-sm">{generateAbout(character)}</p>
             </div>
-            <p className="text-sm">{generateAbout(character)}</p>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <div className="flex gap-2">
-              <Image
-                src="episodes.svg"
-                alt="episodes"
-                width={100}
-                height={100}
-                className="w-5"
-              />
-              <h4 className="text-sm font-bold">Episodes</h4>
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-2">
+                <Image
+                  src="episodes.svg"
+                  alt="episodes"
+                  width={100}
+                  height={100}
+                  className="w-5"
+                />
+                <h4 className="text-sm font-bold">Episodes</h4>
+              </div>
+              <Episodes episodeIds={getEpisodeIds(character.episode)} />
             </div>
-
-            <Episodes episodeIds={getEpisodeIds(character.episode)} />
-          </div>
-        </section>
-        <button className="flex justify-between justify-self-end rounded-full bg-blue-500 p-4 text-sm font-bold text-white hover:bg-blue-600">
-          Find out more about Rick{' '}
-          <Image
-            src="external-link.svg"
-            alt="episodes"
-            width={100}
-            height={100}
-            className="w-5"
-          />
-        </button>
+          </section>
+          <button className="flex cursor-pointer justify-between justify-self-end rounded-full bg-blue-500 p-4 text-sm font-bold text-white hover:bg-blue-600">
+            Find out more about {getFirstName(character.name)}
+            <Image
+              src="external-link.svg"
+              alt="episodes"
+              width={100}
+              height={100}
+              className="w-5"
+            />
+          </button>
+        </div>
       </article>
     </div>
   );
