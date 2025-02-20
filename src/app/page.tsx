@@ -9,7 +9,6 @@ export default function Home() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  // const [showInfoModel, setShowInfoModel] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
     null,
   );
@@ -36,8 +35,6 @@ export default function Home() {
 
   const handleMoreInfo = (character: Character) => {
     setSelectedCharacter(character);
-
-    // setShowInfoModel(true);
     if (typeof window != 'undefined' && window.document) {
       document.body.style.overflow = 'hidden';
     }
